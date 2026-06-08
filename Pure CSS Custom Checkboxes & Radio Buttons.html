@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS Custom Checkboxes & Radio Buttons</title>
+    <style>
+      /* Reset & Layout Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8fafc; /* Light slate background */
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        color: #334155;
+      }
+
+      /* Form Card Container */
+      .form-card {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      fieldset {
+        border: none;
+        margin-bottom: 28px;
+      }
+
+      fieldset:last-of-type {
+        margin-bottom: 0;
+      }
+
+      legend {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #64748b;
+        margin-bottom: 16px;
+      }
+
+      /* ==========================================================================
+       CUSTOM FORM CONTROL CORE ARCHITECTURE
+       ========================================================================== */
+
+      /* The main wrapper label */
+      .custom-control {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-left: 36px;
+        margin-bottom: 14px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        user-select: none; /* Prevents text highlighting on rapid clicks */
+      }
+
+      .custom-control:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Completely hide the default browser native input input safely */
+      .custom-control input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* Create the new custom visual indicator box/circle base */
+      .indicator {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: 22px;
+        width: 22px;
+        background-color: #ffffff;
+        border: 2px solid #cbd5e1;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Differentiate shapes: Square for Checkbox, Perfect Circle for Radio */
+      .custom-control-checkbox .indicator {
+        border-radius: 6px;
+      }
+
+      .custom-control-radio .indicator {
+        border-radius: 50%;
+      }
+
+      /* --- HOVER & FOCUS STATES --- */
+      /* Light blue border glow on hover */
+      .custom-control:hover input ~ .indicator {
+        border-color: #93c5fd;
+        background-color: #f8fafc;
+      }
+
+      /* Keyboard navigation focus indicator rings */
+      .custom-control input:focus-visible ~ .indicator {
+        outline: 2px solid #2563eb;
+        outline-offset: 3px;
+      }
+
+      /* --- CHECKED STATE ACTIVE STYLES --- */
+      /* Turn background solid blue and match border color when active */
+      .custom-control input:checked ~ .indicator {
+        background-color: #2563eb;
+        border-color: #2563eb;
+      }
+
+      /* --- INNER MARKERS (The Icons inside the indicators) --- */
+      /* Create wrapper properties for pseudo-elements */
+      .indicator::after {
+        content: "";
+        position: absolute;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+        top: 50%;
+        left: 50%;
+        transition: opacity 0.15s ease,
+          transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      /* Checkbox Indicator: Clean Custom SVG Inline Checkmark Background */
+      .custom-control-checkbox .indicator::after {
+        width: 12px;
+        height: 12px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      /* Radio Indicator: Perfectly Centered White Inner Dot */
+      .custom-control-radio .indicator::after {
+        width: 8px;
+        height: 8px;
+        background-color: #ffffff;
+        border-radius: 50%;
+      }
+
+      /* Reveal and scale up the inner markers smoothly upon being selected */
+      .custom-control input:checked ~ .indicator::after {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      /* Subtle strike-through text effect variant for completed checkboxes */
+      .custom-control input:checked ~ .control-text {
+        color: #94a3b8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-card">
+      <!-- 1. Custom Checkbox Cluster Set -->
+      <fieldset>
+        <legend>Choose Core Skills</legend>
+
+        <label class="custom-control custom-control-checkbox">
+          <input type="checkbox" name="skills" value="html" checked />
+          <div class="indicator"></div>
+          <span class="control-text">HTML5 Semantics</span>
+        </label>
+
+        <label class="custom-control custom-control-checkbox">
+          <input type="checkbox" name="skills" value="css" />
+          <div class="indicator"></div>
+          <span class="control-text">Advanced CSS Architecture</span>
+        </label>
+
+        <label class="custom-control custom-control-checkbox">
+          <input type="checkbox" name="skills" value="layout" />
+          <div class="indicator"></div>
+          <span class="control-text">Flexbox & Grid Systems</span>
+        </label>
+      </fieldset>
+
+      <!-- 2. Custom Radio Button Cluster Set -->
+      <fieldset>
+        <legend>Select Experience Tier</legend>
+
+        <label class="custom-control custom-control-radio">
+          <input type="radio" name="experience" value="junior" />
+          <div class="indicator"></div>
+          <span class="control-text">Junior (0 - 2 Years)</span>
+        </label>
+
+        <label class="custom-control custom-control-radio">
+          <input type="radio" name="experience" value="mid" checked />
+          <div class="indicator"></div>
+          <span class="control-text">Midweight (2 - 5 Years)</span>
+        </label>
+
+        <label class="custom-control custom-control-radio">
+          <input type="radio" name="experience" value="senior" />
+          <div class="indicator"></div>
+          <span class="control-text">Senior / Lead (5+ Years)</span>
+        </label>
+      </fieldset>
+    </div>
+  </body>
+</html>

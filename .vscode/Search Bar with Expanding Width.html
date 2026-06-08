@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expanding Search Bar</title>
+    <style>
+      /* Dark luxury canvas layout */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #05070f;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* THE SEARCH CONTAINER: Anchors elements and handles the width transition */
+      .search-wrapper {
+        display: flex;
+        align-items: center;
+        width: 160px; /* Narrow starting width */
+        height: 50px;
+        background-color: #111322;
+        border: 1px solid #22253f;
+        border-radius: 50px;
+        padding: 0 16px;
+        box-sizing: border-box;
+        position: relative;
+
+        /* Smoothly morph properties over 0.4 seconds using a custom cubic-bezier */
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s,
+          box-shadow 0.3s;
+      }
+
+      /* THE VISUAL VECTOR ICON: Clean SVG magnifying glass */
+      .search-icon {
+        width: 20px;
+        height: 20px;
+        stroke: #64748b;
+        flex-shrink: 0; /* Prevents icon from squishing during animation */
+        transition: stroke 0.3s ease;
+      }
+
+      /* THE INPUT FIELD: Takes up remaining card width silently */
+      .search-input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding-left: 12px;
+        color: #ffffff;
+        font-size: 15px;
+      }
+
+      .search-input::placeholder {
+        color: #475569;
+      }
+
+      /* --- THE PURE CSS STATE ENGINE --- */
+
+      /* THE TRICK: If ANYTHING inside the wrapper gains focus, expand the entire container width,
+       illuminate the border, and add a soft blue neon bloom effect.
+    */
+      .search-wrapper:focus-within {
+        width: 320px; /* Doubles in size on click */
+        border-color: #6366f1;
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+      }
+
+      /* Turn the magnifying glass electric blue when active */
+      .search-wrapper:focus-within .search-icon {
+        stroke: #6366f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="search-wrapper">
+      <svg
+        class="search-icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        />
+      </svg>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search files, tags, topics..."
+      />
+    </div>
+  </body>
+</html>

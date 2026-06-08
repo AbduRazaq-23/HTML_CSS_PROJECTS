@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neumorphic Radio Buttons</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #e0e8f6;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      .radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .radio-label {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        user-select: none;
+        color: #556075;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .radio-input {
+        display: none;
+      }
+
+      .radio-button {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-color: #e0e8f6;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+
+        box-shadow: -5px -5px 10px #ffffff, 5px 5px 10px #b8c4d9;
+      }
+
+      .radio-button::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #a3b1c9;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+      }
+
+      .radio-input:checked + .radio-button {
+        box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 7px #b8c4d9;
+      }
+
+      .radio-input:checked + .radio-button::after {
+        opacity: 1;
+        transform: scale(1);
+        background-color: #4f46e5;
+        box-shadow: 0 0 8px rgba(79, 70, 229, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="radio-group">
+      <label class="radio-label">
+        <input
+          type="radio"
+          name="neumorphic-choice"
+          class="radio-input"
+          checked
+        />
+        <div class="radio-button"></div>
+        <span>Action Alpha</span>
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="neumorphic-choice" class="radio-input" />
+        <div class="radio-button"></div>
+        <span>Option Beta</span>
+      </label>
+    </div>
+  </body>
+</html>

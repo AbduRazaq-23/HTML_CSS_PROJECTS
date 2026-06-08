@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f5f9;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 20px;
+}
+
+.tag-card {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+  width: 100%;
+  max-width: 480px;
+}
+
+.tag-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.tag-card p {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.tag-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tag-input-container:hover {
+  border-color: #94a3b8;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e2e8f0;
+  color: #334155;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  user-select: none;
+  transition: background-color 0.15 ease, color 0.15 ease;
+}
+
+.tag-chip:hover {
+  background-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.tag-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  margin-left: 6px;
+  padding: 2px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: #64748b;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tag-delete-btn:hover {
+  background-color: #94a3b8;
+  color: #ffffff;
+}
+
+.tag-delete-btn svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.fake-input-placeholder {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #94a3b8;
+  padding-left: 4px;
+  min-width: 120px;
+}

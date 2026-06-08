@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unique CSS Typing Effect</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #030712;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      .terminal-wrapper {
+        background-color: rgba(17, 24, 39, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+      }
+
+      .typing-container {
+        display: inline-block;
+        position: relative;
+      }
+
+      .typing-text {
+        color: #38bdf8;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+
+        animation: typeText 4s steps(22) infinite,
+          glowText 2s ease-in-out infinite alternate;
+      }
+
+      .typing-container::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 24px;
+        background-color: #f43f5e;
+        box-shadow: 0 0 8px #f43f5e;
+
+        animation: followCursor 4s steps(22) infinite,
+          blinkCursor 0.6s step-end infinite;
+      }
+
+      @keyframes typeText {
+        0%,
+        10% {
+          width: 0;
+        }
+        50%,
+        85% {
+          width: 100%;
+        }
+        95%,
+        100% {
+          width: 0;
+        }
+      }
+
+      @keyframes followCursor {
+        0%,
+        10% {
+          left: 0;
+        }
+        50%,
+        85% {
+          left: 100%;
+        }
+        95%,
+        100% {
+          left: 0;
+        }
+      }
+
+      @keyframes blinkCursor {
+        from,
+        to {
+          background-color: transparent;
+          box-shadow: none;
+        }
+        50% {
+          background-color: #f43f5e;
+          box-shadow: 0 0 8px #f43f5e;
+        }
+      }
+
+      @keyframes glowText {
+        from {
+          text-shadow: 0 0 4px rgba(56, 189, 248, 0.3);
+        }
+        to {
+          text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="terminal-wrapper">
+      <div class="typing-container">
+        <div class="typing-text">CSS Typing Effect</div>
+      </div>
+    </div>
+  </body>
+</html>

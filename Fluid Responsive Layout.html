@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fluid Responsive Layout</title>
+    <style>
+      /* Universal Box Reset */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        background-color: #0b0f19;
+        color: #f3f4f6;
+        font-family: system-ui, sans-serif;
+        padding: 2rem;
+      }
+
+      .title {
+        font-size: clamp(1.5rem, 4vw + 1rem, 3rem);
+        text-align: center;
+        margin-bottom: 2rem;
+        background: linear-gradient(to right, #6366f1, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: transform 0.2s, border-color 0.2s;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: #a855f7;
+      }
+
+      .card p {
+        color: #9ca3af;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Smart Fluid Grid</h1>
+
+    <main class="grid">
+      <div class="card">
+        <h2>Card One</h2>
+        <p>
+          Resize your browser window to see this box layout adjust automatically
+          without an absolute breakdown.
+        </p>
+      </div>
+      <div class="card">
+        <h2>Card Two</h2>
+        <p>
+          By using modern styling rules, we completely skip writing a hundred
+          individual media queries.
+        </p>
+      </div>
+      <div class="card">
+        <h2>Card Three</h2>
+        <p>
+          The text scaling engine adapts dynamically based directly on the
+          screen's viewport percentage.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

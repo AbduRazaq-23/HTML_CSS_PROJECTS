@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS 3D Flip Card</title>
+    <style>
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0f172a; /* Dark Slate background */
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+      }
+
+      /* 1. The Perspective Container (The Stage) */
+      .card-container {
+        background-color: transparent;
+        width: 320px;
+        height: 450px;
+        perspective: 1000px; /* Crucial for the 3D depth effect */
+      }
+
+      /* 2. The Card Wrapper (Handles the actual rotation) */
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d; /* Forces child elements to live in 3D space */
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 16px;
+      }
+
+      /* Trigger the 180-degree flip on hover */
+      .card-container:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      /* 3. Common Shared Styles for Both Sides */
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden; /* Safari support */
+        backface-visibility: hidden; /* Hides the reverse side when turned away */
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px;
+      }
+
+      /* --- FRONT SIDE STYLING --- */
+      .card-front {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: #ffffff;
+      }
+
+      .card-front .chip {
+        width: 45px;
+        height: 35px;
+        background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+        border-radius: 6px;
+        align-self: flex-start;
+        opacity: 0.8;
+      }
+
+      .card-front .card-number {
+        font-size: 22px;
+        letter-spacing: 3px;
+        font-weight: 500;
+        text-align: left;
+        margin-top: auto;
+        margin-bottom: 24px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-front .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      .card-front .card-holder {
+        text-align: left;
+      }
+
+      /* --- BACK SIDE STYLING --- */
+      .card-back {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        color: #ffffff;
+        transform: rotateY(
+          180deg
+        ); /* Pre-flips the back face so it sits correctly behind the front */
+        border: 1px solid #374151;
+      }
+
+      /* Magnetic Stripe mimicking a credit card */
+      .card-back .magnetic-stripe {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: #000000;
+      }
+
+      .card-back .signature-area {
+        background-color: #ffffff;
+        color: #333333;
+        width: 100%;
+        height: 40px;
+        margin-top: 80px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 12px;
+        font-family: "Courier New", Courier, monospace;
+        font-weight: bold;
+        font-style: italic;
+        border-radius: 4px;
+      }
+
+      .card-back .signature-area span {
+        background-color: #fee2e2;
+        color: #991b1b;
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 2px;
+        font-family: sans-serif;
+        font-style: normal;
+      }
+
+      .card-back .info-text {
+        font-size: 11px;
+        color: #9ca3af;
+        line-height: 1.5;
+        text-align: left;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The 3D Perspective Stage -->
+    <div class="card-container">
+      <!-- The Core Moving Component -->
+      <div class="card-inner">
+        <!-- Card Face: Front -->
+        <div class="card-front">
+          <div class="chip"></div>
+          <div class="card-number">5412 7512 3456 7890</div>
+          <div class="card-footer">
+            <div class="card-holder">
+              <div style="color: #93c5fd; font-size: 9px; margin-bottom: 2px">
+                Card Holder
+              </div>
+              <strong>Alex Mercer</strong>
+            </div>
+            <div class="card-expiry">
+              <div style="color: #93c5fd; font-size: 9px; margin-bottom: 2px">
+                Expires
+              </div>
+              <strong>12/29</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Face: Back -->
+        <div class="card-back">
+          <div class="magnetic-stripe"></div>
+          <div class="signature-area">
+            <em>Alex Mercer</em>
+            <span>842</span>
+          </div>
+          <p class="info-text">
+            This card is property of your network bank. If found, please return
+            to the nearest branch. Authorized signature required.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS Day/Night Toggle Switch</title>
+    <style>
+      /* Reset and Center Container */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f3f8;
+        transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* Dark Mode State for Body */
+      body:has(#toggle:checked) {
+        background-color: #1a1c23;
+      }
+
+      /* Hide the default checkbox entirely */
+      .toggle-checkbox {
+        display: none;
+      }
+
+      /* Toggle Track (The Container) */
+      .toggle-label {
+        width: 130px;
+        height: 65px;
+        background-color: #38bdf8; /* Day Sky Color */
+        border-radius: 50px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.15),
+          0 4px 10px rgba(56, 189, 248, 0.2);
+        overflow: hidden;
+      }
+
+      /* The Moving Knob (Sun / Moon) */
+      .toggle-knob {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 55px;
+        height: 55px;
+        background-color: #fbbf24; /* Sun Color */
+        border-radius: 50%;
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+          background-color 0.5s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+      }
+
+      /* Moon Crater Detail (Hidden by default during day) */
+      .toggle-knob::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 12px;
+        width: 12px;
+        height: 12px;
+        background-color: #94a3b8;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        box-shadow: 16px 14px 0 -2px #94a3b8, 22px 2px 0 -3px #94a3b8;
+      }
+
+      /* Clouds (Day time decorative elements) */
+      .decorations {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cloud {
+        position: absolute;
+        background-color: #ffffff;
+        border-radius: 50%;
+        bottom: -10px;
+        right: 20px;
+        width: 35px;
+        height: 35px;
+        opacity: 1;
+        transition: transform 0.5s ease, opacity 0.4s ease;
+        box-shadow: -15px 4px 0 -2px #ffffff, -25px 10px 0 -4px #ffffff;
+      }
+
+      /* Stars (Night time decorative elements) */
+      .star {
+        position: absolute;
+        background-color: #ffffff;
+        border-radius: 50%;
+        top: 20px;
+        left: 40px;
+        width: 3px;
+        height: 3px;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: transform 0.5s ease, opacity 0.4s ease;
+        box-shadow: 20px -8px 0 0 #ffffff, 15px 15px 0 1px #ffffff,
+          35px 5px 0 -1px #ffffff;
+      }
+
+      /* ==========================================================================
+       ANIMATION LOGIC (When Checkbox is Checked)
+       ========================================================================== */
+
+      /* 1. Change Track Background to Night Sky */
+      .toggle-checkbox:checked + .toggle-label {
+        background-color: #1e1b4b; /* Deep Night Blue */
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.4),
+          0 4px 10px rgba(30, 27, 75, 0.4);
+      }
+
+      /* 2. Move Knob to the right and transform Sun -> Moon */
+      .toggle-checkbox:checked + .toggle-label .toggle-knob {
+        transform: translateX(65px);
+        background-color: #cbd5e1; /* Moon Silver-Gray */
+      }
+
+      /* 3. Show Moon Craters */
+      .toggle-checkbox:checked + .toggle-label .toggle-knob::before {
+        opacity: 1;
+        transition-delay: 0.2s;
+      }
+
+      /* 4. Slide Clouds Down out of view */
+      .toggle-checkbox:checked + .toggle-label .cloud {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      /* 5. Drop Stars Down into view */
+      .toggle-checkbox:checked + .toggle-label .star {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.1s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The Interactive Toggle Element Stack -->
+    <input type="checkbox" id="toggle" class="toggle-checkbox" />
+
+    <label for="toggle" class="toggle-label">
+      <div class="toggle-knob"></div>
+      <div class="decorations">
+        <div class="cloud"></div>
+        <div class="star"></div>
+      </div>
+    </label>
+  </body>
+</html>

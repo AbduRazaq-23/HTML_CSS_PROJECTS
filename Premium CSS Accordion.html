@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium CSS Accordion</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at center, #1e1b4b 0%, #090514 100%);
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 20px;
+      }
+
+      .accordion-container {
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .accordion-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .accordion-item[open] {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(168, 85, 247, 0.4);
+        box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+      }
+
+      .accordion-summary {
+        list-style: none;
+        padding: 20px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #e2e8f0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+      }
+
+      .accordion-summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .accordion-arrow {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .accordion-arrow::before,
+      .accordion-arrow::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 2px;
+        background-color: #a855f7;
+        box-shadow: 0 0 8px #a855f7;
+        transition: transform 0.3s ease;
+      }
+
+      .accordion-arrow::before {
+        transform: rotate(45deg) translateX(-3px);
+      }
+
+      .accordion-arrow::after {
+        transform: rotate(-45deg) translateX(3px);
+      }
+
+      .accordion-item[open] .accordion-summary {
+        color: #f3e8ff;
+      }
+
+      .accordion-item[open] .accordion-arrow::before {
+        transform: rotate(0deg) translateX(-4px);
+      }
+
+      .accordion-item[open] .accordion-arrow::after {
+        transform: rotate(0deg) translateX(4px);
+      }
+
+      .accordion-content {
+        padding: 0 20px 20px 20px;
+        color: #94a3b8;
+        font-size: 14px;
+        line-height: 1.6;
+        animation: sweepIn 0.4s ease-out;
+      }
+
+      @keyframes sweepIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="accordion-container">
+      <details class="accordion-item">
+        <summary class="accordion-summary">
+          <span>Is it customizable?</span>
+          <div class="accordion-arrow"></div>
+        </summary>
+        <div class="accordion-content">
+          Absolutely. By overriding the default browser markup states via CSS
+          attributes like <code>[open]</code>, you gain absolute artistic
+          control over animations and styles.
+        </div>
+      </details>
+    </div>
+  </body>
+</html>

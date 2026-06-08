@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS Expanding Search Bar</title>
+    <style>
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0f172a; /* Sleek Dark Slate background */
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* ==========================================================================
+       EXPANDING SEARCH BAR ARCHITECTURE
+       ========================================================================== */
+
+      /* The main wrapper wrapper box */
+      .search-box {
+        position: relative;
+        width: 50px; /* Starting width matches the icon shape exactly */
+        height: 50px;
+        background-color: #1e293b; /* Darker slate input track */
+        border-radius: 50px;
+        padding: 5px;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      /* The actual text input node */
+      .search-input {
+        width: 100%;
+        height: 100%;
+        background: none;
+        border: none;
+        outline: none;
+        padding-left: 15px;
+        padding-right: 45px; /* Leaves space so text doesn't overlap the icon */
+        font-size: 16px;
+        color: #ffffff;
+        opacity: 0; /* Hidden while closed */
+        transition: opacity 0.2s ease;
+      }
+
+      /* Placeholder text style adjustment */
+      .search-input::placeholder {
+        color: #64748b;
+      }
+
+      /* The Search Button / Visual Icon Overlay */
+      .search-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #3b82f6; /* Bright accent blue */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        pointer-events: none; /* Allows clicks to register directly on the input text field behind it */
+      }
+
+      /* Pure CSS Vector Search Icon (Magnifying Glass) */
+      .search-icon {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        position: relative;
+        transform: rotate(-45deg) translate(-1px, -1px);
+      }
+
+      /* The handle of the magnifying glass */
+      .search-icon::after {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 6px;
+        width: 2px;
+        height: 10px;
+        background-color: #ffffff;
+      }
+
+      /* ==========================================================================
+       TRIGGER LOGIC: EXPANSION STATES
+       ========================================================================== */
+
+      /* Expand the container on hover OR when the internal input is actively focused */
+      .search-box:hover,
+      .search-box:focus-within {
+        width: 300px; /* Fully expanded width */
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+      }
+
+      /* Make the text visible and switch the blue button accent color upon expansion */
+      .search-box:hover .search-input,
+      .search-box:focus-within .search-input {
+        opacity: 1;
+        transition-delay: 0.1s; /* Delays text fade-in slightly until track opens */
+      }
+
+      .search-box:hover .search-btn,
+      .search-box:focus-within .search-btn {
+        background-color: #2563eb; /* Deeper blue accent state */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Search Wrapper -->
+    <div class="search-box">
+      <!-- The functional invisible input -->
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search files, tags, topics..."
+      />
+
+      <!-- The styled visual button container with pure CSS icon assets -->
+      <div class="search-btn">
+        <div class="search-icon"></div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS Floating Label Contact Form</title>
+    <style>
+      /* Reset & Base Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        padding: 20px;
+      }
+
+      /* Form Container Card */
+      .form-container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 450px;
+      }
+
+      .form-container h2 {
+        color: #333333;
+        margin-bottom: 8px;
+        font-size: 24px;
+      }
+
+      .form-container p {
+        color: #666666;
+        font-size: 14px;
+        margin-bottom: 30px;
+      }
+
+      /* Floating Label Group */
+      .input-group {
+        position: relative;
+        margin-bottom: 24px;
+      }
+
+      /* Input & Textarea Base Styles */
+      .input-group input,
+      .input-group textarea {
+        width: 100%;
+        padding: 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        background: transparent;
+        outline: none;
+        font-size: 16px;
+        color: #333333;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      /* Custom scrollbar and sizing constraint for textarea */
+      .input-group textarea {
+        height: 120px;
+        resize: vertical;
+      }
+
+      /* Change border color on focus */
+      .input-group input:focus,
+      .input-group textarea:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+      }
+
+      /* Label Styling & Positioning */
+      .input-group label {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffffff;
+        padding: 0 6px;
+        color: #94a3b8;
+        font-size: 16px;
+        pointer-events: none; /* Allows clicks to pass through to the input */
+        transition: top 0.2s ease, transform 0.2s ease, font-size 0.2s ease,
+          color 0.2s ease;
+      }
+
+      /* Specific starting position override for textarea label */
+      .input-group textarea ~ label {
+        top: 24px;
+      }
+
+      /* ==========================================================================
+       FLOATING LOGIC
+       Triggers when input is focused OR when placeholder is NOT shown (has text)
+       ========================================================================== */
+      .input-group input:focus ~ label,
+      .input-group input:not(:placeholder-shown) ~ label,
+      .input-group textarea:focus ~ label,
+      .input-group textarea:not(:placeholder-shown) ~ label {
+        top: 0;
+        transform: translateY(-50%);
+        font-size: 12px;
+        font-weight: 600;
+        color: #667eea;
+      }
+
+      /* Error state / Required marker hint styling */
+      .input-group label span {
+        color: #ef4444;
+        margin-left: 2px;
+      }
+
+      /* Submit Button */
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.1s ease;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      }
+
+      .submit-btn:hover {
+        opacity: 0.95;
+      }
+
+      .submit-btn:active {
+        transform: scale(0.98);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Get in touch</h2>
+      <p>We'll get back to you as soon as possible.</p>
+
+      <form action="#" method="POST" autocomplete="off">
+        <!-- Name Input -->
+        <div class="input-group">
+          <!-- The placeholder=" " is required for the CSS :not(:placeholder-shown) logic to work -->
+          <input type="text" id="name" placeholder=" " required />
+          <label for="name">Full Name<span>*</span></label>
+        </div>
+
+        <!-- Email Input -->
+        <div class="input-group">
+          <input type="email" id="email" placeholder=" " required />
+          <label for="email">Email Address<span>*</span></label>
+        </div>
+
+        <!-- Subject Input -->
+        <div class="input-group">
+          <input type="text" id="subject" placeholder=" " />
+          <label for="subject">Subject</label>
+        </div>
+
+        <!-- Message Textarea -->
+        <div class="input-group">
+          <textarea id="message" placeholder=" " required></textarea>
+          <label for="message">Your Message<span>*</span></label>
+        </div>
+
+        <!-- Button -->
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </body>
+</html>

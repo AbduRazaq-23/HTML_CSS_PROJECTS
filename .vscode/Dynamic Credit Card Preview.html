@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Credit Card Preview</title>
+    <style>
+      /* Dark luxury backdrop canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #020617;
+        font-family: "Courier New", Courier, monospace; /* Monospace font gives an authentic embossed feel */
+      }
+
+      /* THE CREDIT CARD CONTAINER */
+      .credit-card {
+        width: 400px;
+        height: 250px;
+        border-radius: 16px;
+        padding: 24px;
+        box-sizing: border-box;
+        color: #ffffff;
+        letter-spacing: 2px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+        /* Premium glassmorphic gradient texture */
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.03) 100%
+        );
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* CSS GRID ENGINE: Sets up a balanced 3-row layout structure */
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 12px;
+
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-style: preserve-3d;
+        perspective: 1000px;
+      }
+
+      /* Subtle interactive 3D lift on hover */
+      .credit-card:hover {
+        transform: translateY(-8px) rotateX(4deg) rotateY(-4deg);
+      }
+
+      /* --- FIRST ROW: Chip & Card Type Brand Logo --- */
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Holographic Microchip Indicator */
+      .card-chip {
+        width: 48px;
+        height: 36px;
+        background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        border-radius: 6px;
+        position: relative;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Authentic chip micro-lines */
+      .card-chip::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 16px;
+        width: 16px;
+        height: 100%;
+        border-left: 1px solid rgba(0, 0, 0, 0.15);
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .visa-logo {
+        font-size: 24px;
+        font-weight: 900;
+        font-style: italic;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      /* --- SECOND ROW: Main Card Numbers Placement --- */
+      .card-middle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-number {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        word-spacing: 4px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        width: 100%;
+      }
+
+      /* --- THIRD ROW: Cardholder Meta Details Info --- */
+      .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: system-ui, -apple-system, sans-serif; /* Clean sans-serif metadata text */
+      }
+
+      .meta-label {
+        font-size: 9px;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 4px;
+        letter-spacing: 1px;
+      }
+
+      .meta-value {
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="credit-card">
+      <div class="card-top">
+        <div class="card-chip"></div>
+        <div class="visa-logo">VISA</div>
+      </div>
+
+      <div class="card-middle">
+        <div class="card-number">4532 7182 9381 0024</div>
+      </div>
+
+      <div class="card-bottom">
+        <div>
+          <div class="meta-label">Card Holder</div>
+          <div class="meta-value">ALEXANDER WRIGHT</div>
+        </div>
+        <div style="text-align: right">
+          <div class="meta-label">Expires</div>
+          <div class="meta-value">08/29</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Material Floating Label Input</title>
+    <style>
+      /* Dark, modern canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #090d16;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* Container component anchoring the relative label position */
+      .input-group {
+        position: relative;
+        width: 320px;
+      }
+
+      /* Modern text input styling */
+      .floating-input {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+        color: #ffffff;
+        background: #111827;
+        border: 2px solid #374151;
+        border-radius: 8px;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      /* Subtle neon aura when focused */
+      .floating-input:focus {
+        border-color: #6366f1; /* Indigo focus color */
+        box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+      }
+
+      /* Meticulously positioned floating label overlay */
+      .floating-label {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #111827;
+        padding: 0 6px;
+        color: #9ca3af;
+        font-size: 16px;
+        pointer-events: none; /* Allows click events to pass straight through to 
+input */
+        transition: transform 0.2s ease, top 0.2s ease, font-size 0.2s ease,
+          color 0.2s ease;
+      }
+
+      /* --- THE PURE CSS STATE ENGINE --- */
+
+      /* THE TRICK: If the input is in focus OR if the placeholder is NOT shown,  
+       shrink the label and shift it up out of the way! 
+    */
+      .floating-input:focus ~ .floating-label,
+      .floating-input:not(:placeholder-shown) ~ .floating-label {
+        top: 0;
+        font-size: 12px;
+        color: #6366f1;
+        transform: translateY(-50%);
+      }
+
+      /* Turn the floating label back to neutral grey if it has text but isn't 
+focused */
+      .floating-input:not(:focus):not(:placeholder-shown) ~ .floating-label {
+        color: #9ca3af;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="input-group">
+      <input type="text" id="username" class="floating-input" placeholder=" " />
+      <label for="username" class="floating-label">Username</label>
+    </div>
+  </body>
+</html>

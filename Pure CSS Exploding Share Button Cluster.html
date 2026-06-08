@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure CSS Exploding Share Button Cluster</title>
+    <style>
+      /* Reset & Base Layout */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0f172a; /* Dark Slate Background */
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* ==========================================================================
+       CLUSTER CONTAINER ARCHITECTURE
+       ========================================================================== */
+
+      .share-cluster {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Common Button Reset Styles */
+      .btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          opacity 0.3s ease, box-shadow 0.2s ease;
+        z-index: 1;
+        opacity: 0; /* Hidden behind the main button initially */
+        transform: scale(0.3); /* Shrunk down natively on load */
+      }
+
+      /* Hover effect for social items */
+      .btn:hover {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        transform: scale(
+          1.1
+        ) !important; /* Retain pop size but add scale override */
+      }
+
+      /* Unique Brand Colors for the Social Buttons */
+      .x-tw {
+        background-color: #000000;
+        border: 1px solid #334155;
+      }
+      .fb {
+        background-color: #1877f2;
+      }
+      .li {
+        background-color: #0a66c2;
+      }
+      .wa {
+        background-color: #25d366;
+      }
+
+      /* --- THE MASTER TRIGGER BUTTON --- */
+      .main-trigger {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          #6366f1 0%,
+          #4f46e5 100%
+        ); /* Indigo tint */
+        color: #ffffff;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(79, 70, 229, 0.4);
+        z-index: 2; /* Sits permanently over the hidden child nodes */
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          background-color 0.3s ease;
+      }
+
+      /* Inside Vector Elements for the Share Icon */
+      .share-icon {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        transition: transform 0.4s ease;
+      }
+
+      /* Custom CSS Share Node Connections */
+      .share-icon::before,
+      .share-icon::after {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 2px;
+        background-color: #ffffff;
+        left: 3px;
+      }
+      .share-icon::before {
+        top: 5px;
+        transform: rotate(-30deg);
+      }
+      .share-icon::after {
+        bottom: 5px;
+        transform: rotate(30deg);
+      }
+
+      .node {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background-color: #ffffff;
+        border-radius: 50%;
+      }
+      .n1 {
+        top: 0;
+        right: 0;
+      }
+      .n2 {
+        top: 6px;
+        left: 0;
+      }
+      .n3 {
+        bottom: 0;
+        right: 0;
+      }
+
+      /* ==========================================================================
+       THE EXPLOSION LOGIC (Triggers on Container Hover)
+       ========================================================================== */
+
+      /* Subtle animation on the parent trigger icon overlay */
+      .share-cluster:hover .main-trigger {
+        transform: scale(0.95);
+        background: #4338ca;
+      }
+
+      .share-cluster:hover .share-icon {
+        transform: rotate(360deg);
+      }
+
+      /* Reveal and translate the internal social elements out into their grid quadrant vectors */
+      .share-cluster:hover .btn {
+        opacity: 1;
+      }
+
+      /* Top Left Vector Blast */
+      .share-cluster:hover .x-tw {
+        transform: translate(-55px, -55px) scale(1);
+        transition-delay: 0.02s;
+      }
+
+      /* Top Right Vector Blast */
+      .share-cluster:hover .fb {
+        transform: translate(55px, -55px) scale(1);
+        transition-delay: 0.06s;
+      }
+
+      /* Bottom Left Vector Blast */
+      .share-cluster:hover .li {
+        transform: translate(-55px, 55px) scale(1);
+        transition-delay: 0.1s;
+      }
+
+      /* Bottom Right Vector Blast */
+      .share-cluster:hover .wa {
+        transform: translate(55px, 55px) scale(1);
+        transition-delay: 0.14s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Exploding Cluster Group Container -->
+    <div class="share-cluster">
+      <!-- Central Control Node Trigger Toggle -->
+      <button class="main-trigger" aria-label="Share options Menu">
+        <div class="share-icon">
+          <div class="node n1"></div>
+          <div class="node n2"></div>
+          <div class="node n3"></div>
+        </div>
+      </button>
+
+      <!-- Exploded Peripheral Elements Stack -->
+      <a href="#" class="btn x-tw" title="Share on X">𝕏</a>
+      <a href="#" class="btn fb" title="Share on Facebook">f</a>
+      <a href="#" class="btn li" title="Share on LinkedIn">in</a>
+      <a href="#" class="btn wa" title="Share on WhatsApp">Wa</a>
+    </div>
+  </body>
+</html>
