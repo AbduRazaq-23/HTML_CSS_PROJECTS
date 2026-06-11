@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invalid Input Shake Animation</title>
+    <style>
+      /* Dark minimalist workspace canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #05050a;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      .form-group {
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .input-label {
+        color: #94a3b8;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      /* Core field style blueprint */
+      .shake-input {
+        width: 100%;
+        padding: 14px 16px;
+        background-color: #0f111a;
+        border: 2px solid #1e293b;
+        border-radius: 10px;
+        color: #ffffff;
+        font-size: 16px;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      /* Standard interactive focus color */
+      .shake-input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+      }
+
+      /* --- THE PURE CSS SHAKE ENGINE --- */
+
+      /* THE TRICK: Fire the shake animation ONLY if the input is: 
+      1. :invalid (fails the regex pattern rule) 
+      2. :not(:placeholder-shown) (don't shake when completely empty) 
+      3. :not(:focus) (wait to shake until the user finishes typing and clicks 
+away!) 
+    */
+      .shake-input:invalid:not(:placeholder-shown):not(:focus) {
+        border-color: #ef4444;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+        animation: horizontalShake 0.4s ease-in-out;
+      }
+
+      /* Rapid lateral displacement coordinates */
+      @keyframes horizontalShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        15% {
+          transform: translateX(-8px);
+        }
+        30% {
+          transform: translateX(7px);
+        }
+        45% {
+          transform: translateX(-5px);
+        }
+        60% {
+          transform: translateX(4px);
+        }
+        75% {
+          transform: translateX(-2px);
+        }
+        90% {
+          transform: translateX(1px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-group">
+      <label class="input-label" for="zip"
+        >Enter Zip Code (5 Digits Only)</label
+      >
+      <input
+        type="text"
+        id="zip"
+        class="shake-input"
+        placeholder="e.g. 90210"
+        pattern="[0-9]{5}"
+        required
+      />
+    </div>
+  </body>
+</html>
