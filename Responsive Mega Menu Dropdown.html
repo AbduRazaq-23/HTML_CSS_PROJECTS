@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Mega Menu Dropdown</title>
+    <style>
+      /* Premium dark dashboard staging canvas */
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-color: #030712;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* THE NAVIGATION HEADER FRAME */
+      .navbar {
+        background-color: #0b0f19;
+        border-bottom: 1px solid #1f2937;
+        position: relative; /* REQUIRED: Anchors the absolute mega menu wrap */
+        z-index: 100;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        height: 70px;
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+
+      /* THE TRIGGER ITEM: The link box that fires the open state */
+      .nav-item {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .nav-link {
+        color: #9ca3af;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s, background-color 0.2s;
+      }
+
+      /* Highlight header target when open or hovered */
+      .nav-item:hover .nav-link {
+        color: #ffffff;
+        background-color: #111827;
+      }
+
+      /* --- THE MEGA MENU ENGINE --- */
+
+      /* THE TRICK: Span absolutely across 100% width of the relative navbar container.
+       Hide by default using opacity and visibility instead of display: none to allow transitions. */
+      .mega-menu {
+        position: absolute;
+        top: 100%; /* Sits exactly flush under the navbar bottom border */
+        left: 0;
+        width: 100%;
+        background-color: #0b0f19;
+        border-bottom: 1px solid #1f2937;
+        padding: 40px 0;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(
+          10px
+        ); /* Creates a smooth upward slide animation */
+        transition: opacity 0.25s ease, visibility 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      /* OPEN STATE: Trigger menu on hover over parent navigation node */
+      .nav-item:hover .mega-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      /* MULTI-COLUMN LAYOUT STRUCTURE */
+      .mega-menu-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        /* Configures a clean 4-column layout matrix */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+      }
+
+      .menu-column-title {
+        color: #818cf8; /* Vibrant indigo section headers */
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 0 0 16px 0;
+      }
+
+      .menu-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .menu-links a {
+        color: #9ca3af;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s, transform 0.2s;
+        display: inline-block;
+      }
+
+      /* Interactive sub-link adjustments */
+      .menu-links a:hover {
+        color: #ffffff;
+        transform: translateX(
+          4px
+        ); /* Minor lateral slide bump on cursor target */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <ul class="nav-links">
+          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">Products &nbsp;▾</a>
+
+            <div class="mega-menu">
+              <div class="mega-menu-grid">
+                <div>
+                  <h4 class="menu-column-title">Infrastructure</h4>
+                  <ul class="menu-links">
+                    <li><a href="#">Cloud Compute</a></li>
+                    <li><a href="#">Kubernetes Blocks</a></li>
+                    <li><a href="#">Serverless Node Hosting</a></li>
+                    <li><a href="#">Dedicated Storage Tanks</a></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="menu-column-title">Data Solutions</h4>
+                  <ul class="menu-links">
+                    <li><a href="#">Managed PostgreSQL</a></li>
+                    <li><a href="#">Redis Memory Caches</a></li>
+                    <li><a href="#">Vector Search Indices</a></li>
+                    <li><a href="#">Real-time Time Series</a></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="menu-column-title">Security & Edge</h4>
+                  <ul class="menu-links">
+                    <li><a href="#">DDoS Shield Walls</a></li>
+                    <li><a href="#">Global DNS Networks</a></li>
+                    <li><a href="#">SSL/TLS Vault Keys</a></li>
+                    <li><a href="#">WAF Firewall Profiles</a></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="menu-column-title">Developer Tooling</h4>
+                  <ul class="menu-links">
+                    <li><a href="#">CLI Workspace Tools</a></li>
+                    <li><a href="#">CI/CD Webhook Runners</a></li>
+                    <li><a href="#">API Logging Metrics</a></li>
+                    <li><a href="#">Team Audit Tracking</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Enterprise</a></li>
+        </ul>
+      </div>
+    </nav>
+  </body>
+</html>

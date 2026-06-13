@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Styled Color Picker</title>
+    <style>
+      /* Dark, sleek canvas staging area */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #030712;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* THE PICKER BOX WRAPPER */
+      .color-picker-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background-color: #0f172a;
+        border: 1px solid #1e293b;
+        padding: 12px 20px;
+        border-radius: 100px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      }
+
+      /* THE BASE ELEMENT: Resetting core browser geometry boundaries */
+      .custom-color-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 44px;
+        height: 44px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      /* Elastic pop out scale bump on hover targets */
+      .custom-color-input:hover {
+        transform: scale(1.15);
+      }
+
+      /* --- THE RE-STYLING ENGINE ENGINE --- */
+
+      /* WEBKIT (Chrome, Safari, Edge, Opera) Styling Rules */
+      .custom-color-input::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      .custom-color-input::-webkit-color-swatch {
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* GECKO (Firefox) Styling Rules */
+      .custom-color-input::-moz-color-swatch {
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Associated structural interface text parameters */
+      .picker-label-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .picker-title {
+        color: #f3f4f6;
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .picker-subtext {
+        color: #64748b;
+        font-size: 12px;
+        margin: 2px 0 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="color-picker-wrapper">
+      <input
+        type="color"
+        class="custom-color-input"
+        id="accent-picker"
+        value="#6366f1"
+      />
+
+      <div class="picker-label-group">
+        <label class="picker-title" for="accent-picker">Accent Color</label>
+        <span class="picker-subtext">Click circle to open palette</span>
+      </div>
+    </div>
+  </body>
+</html>

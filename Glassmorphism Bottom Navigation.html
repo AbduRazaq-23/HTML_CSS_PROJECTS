@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glassmorphism Bottom Navigation</title>
+    <style>
+      /* Premium dark app mockup canvas */
+      body {
+        margin: 0;
+        min-height: 150vh; /* Long height to demonstrate scrolling beneath the glass bar */
+        background: linear-gradient(
+          135deg,
+          #0f172a 0%,
+          #1e1b4b 50%,
+          #311042 100%
+        );
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+
+      /* Dummy background elements to showcase the glass transparency during scroll */
+      .decorative-glow {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #db2777;
+        filter: blur(60px);
+        top: 60vh;
+        left: 20%;
+      }
+
+      /* --- THE GLASSMORPHIC BAR --- */
+      .bottom-nav {
+        position: fixed;
+        bottom: 24px; /* Suspended slightly above the edge for a modern floating card look */
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 48px);
+        max-width: 400px; /* Locks to a standard phone container width on wider screens */
+        height: 68px;
+        border-radius: 20px;
+        z-index: 9999;
+
+        /* THE TRICK: Highly diluted white fill + strong backdrop blur */
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px); /* Safari engine fallback */
+
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 12px;
+        box-sizing: border-box;
+      }
+
+      /* INDIVIDUAL TAB BUTTON WRAPPER */
+      .nav-tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        text-decoration: none;
+        color: #94a3b8; /* Subdued neutral icons default state */
+        font-size: 11px;
+        font-weight: 500;
+        width: 60px;
+        height: 100%;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      .tab-icon {
+        width: 22px;
+        height: 22px;
+        stroke: currentColor;
+        fill: none;
+        transition: transform 0.2s ease;
+      }
+
+      /* --- INTERACTIVE STATES --- */
+
+      /* Highlight target when designated as active */
+      .nav-tab.active {
+        color: #38bdf8; /* Bright electric sky blue */
+      }
+
+      /* Slightly bump up individual tab segments when focused or touched */
+      .nav-tab:hover,
+      .nav-tab:active {
+        color: #ffffff;
+      }
+
+      .nav-tab:hover .tab-icon {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="color: #64748b; max-width: 400px; margin: 0 auto">
+      <h2 style="color: #fff; margin-bottom: 8px">App Feed Workspace</h2>
+      <p>
+        Scroll down the layout timeline view. Notice how the colorful decorative
+        elements pass underneath the translucent frosted glass container surface
+        beautifully.
+      </p>
+    </div>
+
+    <div class="decorative-glow"></div>
+
+    <nav class="bottom-nav">
+      <a href="#" class="nav-tab active">
+        <svg class="tab-icon" viewBox="0 0 24 24" stroke-width="2">
+          <path
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+        <span>Home</span>
+      </a>
+
+      <a href="#" class="nav-tab">
+        <svg class="tab-icon" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span>Search</span>
+      </a>
+
+      <a href="#" class="nav-tab">
+        <svg class="tab-icon" viewBox="0 0 24 24" stroke-width="2">
+          <path
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+          />
+        </svg>
+        <span>Alerts</span>
+      </a>
+
+      <a href="#" class="nav-tab">
+        <svg class="tab-icon" viewBox="0 0 24 24" stroke-width="2">
+          <path
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+          />
+        </svg>
+        <span>Profile</span>
+      </a>
+    </nav>
+  </body>
+</html>

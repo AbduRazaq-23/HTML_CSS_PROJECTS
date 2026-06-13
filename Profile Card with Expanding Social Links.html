@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Card with Expanding Social Links</title>
+    <style>
+      /* Premium dark dashboard canvas setup */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #03050a;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* THE PROFILE CARD CONTAINER */
+      .profile-card {
+        width: 320px;
+        background-color: #0b0f19;
+        border: 1px solid #1f2937;
+        border-radius: 24px;
+        padding: 32px;
+        box-sizing: border-box;
+        text-align: center;
+        color: #ffffff;
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      /* Soft card hover feedback frame illumination */
+      .profile-card:hover {
+        border-color: #4f46e5;
+        transform: translateY(-4px);
+      }
+
+      /* AVATAR IMAGE FRAME ACCENT */
+      .avatar-wrapper {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 20px auto;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4f46e5 0%, #a855f7 100%);
+        padding: 3px; /* Creates the premium outer gradient ring border */
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+      }
+
+      .avatar-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #111827;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 28px;
+        color: #f3f4f6;
+      }
+
+      .profile-name {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 6px 0;
+        letter-spacing: 0.5px;
+      }
+
+      .profile-title {
+        font-size: 13px;
+        color: #64748b;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 28px;
+      }
+
+      /* --- THE EXPANDING SOCIAL LINKS TRAY --- */
+      .social-tray {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        height: 44px;
+        align-items: center;
+      }
+
+      /* THE ICON NODE ARCHITECTURE */
+      .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background-color: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 50%;
+        color: #9ca3af;
+        text-decoration: none;
+
+        /* Hiding parameters initialized for the expansion look */
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+
+        /* Smooth return transformation mappings */
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+          background-color 0.2s ease, color 0.2s ease;
+      }
+
+      /* Standard icon target cursor focus illumination */
+      .social-icon:hover {
+        background-color: #4f46e5;
+        color: #ffffff;
+        border-color: #6366f1;
+      }
+
+      /* Vector design internal graphic scales */
+      .social-icon svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+      }
+
+      /* --- THE STAGGERED REVEAL STATE ENGINE --- */
+
+      /* THE TRICK: When the user hovers over the parent card, bring the icons 
+into view */
+      .profile-card:hover .social-icon {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      /* Stagger individual item arrival paths by stepping the transition delays 
+incrementally */
+      .profile-card:hover .social-icon:nth-child(1) {
+        transition-delay: 0s;
+      }
+      .profile-card:hover .social-icon:nth-child(2) {
+        transition-delay: 0.08s;
+      }
+      .profile-card:hover .social-icon:nth-child(3) {
+        transition-delay: 0.16s;
+      }
+      .profile-card:hover .social-icon:nth-child(4) {
+        transition-delay: 0.24s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-card">
+      <div class="avatar-wrapper">
+        <div class="avatar-img">EM</div>
+      </div>
+
+      <h3 class="profile-name">Elena Mitchell</h3>
+      <div class="profile-title">Lead Product Designer</div>
+
+      <div class="social-tray">
+        <a href="#" class="social-icon" aria-label="Twitter Profile">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 
+15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
+            />
+          </svg>
+        </a>
+
+        <a href="#" class="social-icon" aria-label="GitHub Profile">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14
+.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 
+2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 
+0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+            />
+          </svg>
+        </a>
+
+        <a href="#" class="social-icon" aria-label="LinkedIn Profile">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v
+7a6 6 0 0 1 6-6zM2 9h4v12H2z"
+            />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
+
+        <a href="#" class="social-icon" aria-label="Dribbble Portfolio">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path
+              d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35
+8.94 5.66-16.88 5.85m1.95 7.74c4.37-1.37 9.05-1.48 16.03 3.41"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

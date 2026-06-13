@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neumorphic Soft UI Sidebar</title>
+    <style>
+      /* Premium dark dashboard canvas setup */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        background-color: #1e222b; /* THE CRITICAL FOUNDATION: Must be an off-tone mid-dark color */
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* THE NEUMORPHIC SIDEBAR PANEL */
+      .sidebar {
+        width: 280px;
+        height: calc(100vh - 40px);
+        margin: 20px 0 20px 20px; /* Suspended beautifully off the left edge */
+        background-color: #1e222b;
+        border-radius: 24px;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        /* THE NEUMORPHIC POP: High contrast top-left light shadow, deep bottom-right dark shadow */
+        box-shadow: 6px 6px 16px #14171e, -6px -6px 16px #282d38;
+      }
+
+      /* BRAND LOGO CONTEXT LAYER */
+      .brand-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        margin-bottom: 40px;
+      }
+
+      /* Concave Inset Neumorphic Icon Frame */
+      .brand-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        background-color: #1e222b;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* INSET SHADOWS: Makes the icon box look carved directly INTO the sidebar */
+        box-shadow: inset 3px 3px 6px #14171e, inset -3px -3px 6px #282d38;
+      }
+
+      .brand-logo-svg {
+        width: 20px;
+        height: 20px;
+        stroke: #818cf8; /* Soft Indigo core */
+      }
+
+      .brand-title {
+        color: #e2e8f0;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 0.5px;
+      }
+
+      /* LINK TREE NAVIGATION PACK */
+      .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex-grow: 1;
+      }
+
+      /* INDIVIDUAL INTERACTIVE TAB LAYERS */
+      .nav-item a {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 14px 18px;
+        border-radius: 14px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      /* HOVER STATE: Smoothly morph flat links into protruding soft tactile plates */
+      .nav-item a:hover {
+        color: #ffffff;
+        box-shadow: 4px 4px 10px #14171e, -4px -4px 10px #282d38;
+        transform: translateY(-2px); /* Tiny mechanical physical push-up */
+      }
+
+      /* ACTIVE STATE: Press the link down flat into the background */
+      .nav-item.active a {
+        color: #818cf8;
+        box-shadow: inset 4px 4px 8px #14171e, inset -4px -4px 8px #282d38;
+        transform: translateY(0);
+      }
+
+      /* FOOTER CONTROL AREA (Holds profile card or logout actions) */
+      .sidebar-footer {
+        padding-top: 20px;
+        border-top: 1px dashed rgba(148, 163, 184, 0.1);
+      }
+
+      .profile-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .profile-card:hover {
+        box-shadow: inset 3px 3px 6px #14171e, inset -3px -3px 6px #282d38;
+      }
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4f46e5 0%, #a855f7 100%);
+        box-shadow: 3px 3px 6px #14171e, -3px -3px 6px #282d38;
+      }
+
+      .profile-info h4 {
+        color: #f1f5f9;
+        font-size: 13px;
+        margin: 0;
+        font-weight: 600;
+      }
+
+      .profile-info span {
+        color: #64748b;
+        font-size: 11px;
+      }
+
+      .nav-icon {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2.5;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div>
+        <div class="brand-section">
+          <div class="brand-icon-wrapper">
+            <svg
+              class="brand-logo-svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
+          </div>
+          <h2 class="brand-title">NeoNexus</h2>
+        </div>
+
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <a href="#">
+              <svg class="nav-icon" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"
+                />
+              </svg>
+              <span>Overview</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <svg class="nav-icon" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                />
+              </svg>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <svg class="nav-icon" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+              <span>Security</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <svg class="nav-icon" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="profile-card">
+          <div class="avatar"></div>
+          <div class="profile-info">
+            <h4>Sarah Jenkins</h4>
+            <span>SysOp Administrator</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
