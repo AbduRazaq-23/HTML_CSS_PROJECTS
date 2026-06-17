@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gradient Text Reveal Layer</title>
+    <style>
+      /* Premium dark studio backdrop canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #030408;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+      }
+
+      /* THE GRADIENT REVEAL TEXT BLOCK */
+      .reveal-headline {
+        font-size: 64px;
+        font-weight: 800;
+        letter-spacing: -2px;
+        margin: 0;
+        text-align: center;
+        line-height: 1.1;
+
+        /* THE TRICK: Expand the gradient background to double the container size */
+        background: linear-gradient(
+          120deg,
+          #a855f7 0%,
+          #6366f1 25%,
+          #3b82f6 50%,
+          #ec4899 75%,
+          #a855f7 100%
+        );
+        background-size: 200% auto; /* Gives the layout canvas room to slide */
+
+        /* THE CORE ENGINE: Clips the background gradient strictly to the text mask shape */
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent; /* Makes standard text color invisible to show background */
+
+        /* Infinite shimmer translation animation loop */
+        animation: shineFlow 5s linear infinite;
+
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      /* Elastic mechanical physical pop forward on hover */
+      .reveal-headline:hover {
+        transform: scale(1.04);
+      }
+
+      /* --- THE SHIMMER WAVE ANIMATION ENGINE --- */
+
+      /* Smoothly translate the background horizontally across the character masks */
+      @keyframes shineFlow {
+        0% {
+          background-position: 0% center;
+        }
+        100% {
+          background-position: 200% center; /* Completes a seamless loop rotation cycle */
+        }
+      }
+
+      /* Optional: Responsive font sizing safety clamp container setup */
+      @media (max-width: 600px) {
+        .reveal-headline {
+          font-size: 38px;
+          letter-spacing: -1px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="reveal-headline">
+      The Future of Modern<br />
+      Interface Engineering.
+    </h1>
+  </body>
+</html>
