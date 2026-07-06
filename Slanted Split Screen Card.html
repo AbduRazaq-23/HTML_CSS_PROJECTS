@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slanted Split-Screen Card</title>
+    <style>
+      /* Premium dark staging studio canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #03050a;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      /* THE MAIN PRESENTATION CARD FRAME */
+      .split-card {
+        position: relative;
+        width: 460px;
+        height: 260px;
+        background-color: #0c101d; /* Base Color (Right Side) */
+        border: 1px solid #22253f;
+        border-radius: 24px;
+        overflow: hidden; /* Essential: clips the internal slanted polygon layer */
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+        /* Staging display context for foreground text overlays */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        box-sizing: border-box;
+
+        transition: border-color 0.3s ease,
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* Soft interaction card lift and highlight framework */
+      .split-card:hover {
+        border-color: #4f46e5;
+        transform: translateY(-4px);
+      }
+
+      /* --- THE DIAGONAL SPLIT ENGINE --- */
+
+      /* THE TRICK: Use an absolute pseudo-element to create the left side block.
+       The clip-path polygon draws four points: (top-left, top-right slanted, bottom-right slanted, bottom-left).
+    */
+      .split-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 65%; /* Dictates how far across the card face the slant extends */
+        height: 100%;
+
+        /* High-contrast linear indigo gradient for the left panel block */
+        background: linear-gradient(135deg, #311042 0%, #4f46e5 100%);
+
+        /* THE CORE GRAPHIC SLICE CODE:
+         X  Y coords mapping out an asymmetrical trapezoid plate shape */
+        clip-path: polygon(0% 0%, 100% 0%, 72% 100%, 0% 100%);
+
+        z-index: 1; /* Sits firmly underneath foreground typography blocks */
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Interactive visual shift: make the slant expand subtly across the card face on hover */
+      .split-card:hover::before {
+        width: 70%;
+      }
+
+      /* FOREGROUND TEXT SEGMENT BLOCKS */
+      .panel-content {
+        position: relative;
+        z-index: 2; /* Forces text layers above the absolute background clip paths */
+        width: 42%;
+        color: #ffffff;
+      }
+
+      /* Left panel text styles */
+      .panel-left h3 {
+        font-size: 24px;
+        font-weight: 800;
+        margin: 0 0 6px 0;
+        letter-spacing: -0.5px;
+      }
+
+      .panel-left p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.75);
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      /* Right panel text styles */
+      .panel-right {
+        text-align: right;
+      }
+
+      .panel-right .price-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #64748b;
+        margin-bottom: 4px;
+      }
+
+      .panel-right .price-value {
+        font-size: 32px;
+        font-weight: 800;
+        color: #38bdf8; /* Bright electric sky blue highlight color */
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="split-card">
+      <div class="panel-content panel-left">
+        <h3>Premium Core</h3>
+        <p>
+          Deploy localized server instances across high-capacity pipeline trunks
+          globally.
+        </p>
+      </div>
+
+      <div class="panel-content panel-right">
+        <div class="price-label">Starting At</div>
+        <div class="price-value">
+          $49<span style="font-size: 14px; color: #475569; font-weight: 500"
+            >/mo</span
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

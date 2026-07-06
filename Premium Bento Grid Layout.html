@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Bento Grid Layout</title>
+    <style>
+      /* Dark application staging canvas base */
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #030712;
+        font-family: system-ui, -apple-system, sans-serif;
+        padding: 40px 24px;
+        box-sizing: border-box;
+      }
+
+      /* --- THE BENTO GRID MATRIX CORE --- */
+      .bento-container {
+        width: 100%;
+        max-width: 1100px;
+
+        display: grid;
+        /* THE TRICK: Define a balanced 4-column master track layout matrix */
+        grid-template-columns: repeat(4, 1fr);
+        /* Force explicit row heights to maintain robust layout ratios */
+        grid-auto-rows: minmax(160px, auto);
+        gap: 16px;
+      }
+
+      /* THE GENERIC GRID CELL BLUEPRINT */
+      .bento-box {
+        background-color: #0b0f19;
+        border: 1px solid #1f2937;
+        border-radius: 20px;
+        padding: 24px;
+        box-sizing: border-box;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s ease,
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      /* Soft scale lift feedback on item hover targets */
+      .bento-box:hover {
+        border-color: #374151;
+        transform: translateY(-2px);
+      }
+
+      /* --- ASYMMETRICAL SPANNING CONFIGURATIONS --- */
+
+      /* Cell 1: Large Featured Callout Box (Spans 2 columns, 2 rows) */
+      .box-featured {
+        grid-column: span 2;
+        grid-row: span 2;
+        background: linear-gradient(135deg, #0e1324 0%, #0b0f19 100%);
+        border-color: rgba(99, 102, 241, 0.2);
+      }
+
+      /* Cell 2: Tall Vertical Information Column (Spans 1 column, 2 rows) */
+      .box-tall {
+        grid-row: span 2;
+      }
+
+      /* Cell 5: Wide Horizon Analytics Runner (Spans 2 columns, 1 row) */
+      .box-wide {
+        grid-column: span 2;
+      }
+
+      /* TYPOGRAPHY & INTERFACE GRAPHICS FORMATTING */
+      .box-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #64748b;
+        margin: 0 0 8px 0;
+      }
+
+      .box-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+        line-height: 1.2;
+      }
+
+      .box-featured .box-title {
+        font-size: 28px;
+        background: linear-gradient(120deg, #ffffff 0%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .box-desc {
+        font-size: 14px;
+        color: #94a3b8;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .stat-counter {
+        font-size: 38px;
+        font-weight: 800;
+        color: #818cf8; /* Vibrant Indigo core marker display */
+        letter-spacing: -1px;
+        margin-top: auto;
+      }
+
+      /* --- RESPONSIVE MEDIA BREAKPOINT ENGINE --- */
+
+      /* On tablet screens, drop down to a dual column layout configuration */
+      @media (max-width: 900px) {
+        .bento-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .box-tall {
+          grid-row: span 1; /* Normalize extreme tall items */
+        }
+      }
+
+      /* On smartphone displays, collapse the entire matrix flat into a uniform stack layout linear feed */
+      @media (max-width: 600px) {
+        .bento-container {
+          grid-template-columns: 1fr;
+          grid-auto-rows: auto;
+        }
+        .box-featured,
+        .box-tall,
+        .box-wide {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Premium Bento Grid Dashboard Architecture Wrapper Frame -->
+    <main class="bento-container">
+      <!-- Cell 1: Large Featured Component Box (2x2 Matrix Block) -->
+      <section class="bento-box box-featured">
+        <div>
+          <div class="box-label">Core Engine</div>
+          <h2 class="box-title">Next-Gen Deployment Hub</h2>
+        </div>
+        <p class="box-desc">
+          Monitor pipeline automation parameters, cluster distribution matrices,
+          and global edge instances right inside an ultra-scannable workspace.
+        </p>
+      </section>
+
+      <!-- Cell 2: Tall Profile Card Element Component (1x2 Block) -->
+      <section class="bento-box box-tall">
+        <div>
+          <div class="box-label">Performance</div>
+          <h2 class="box-title" style="font-size: 18px">Network Health</h2>
+        </div>
+        <div class="stat-counter">99.9%</div>
+      </section>
+
+      <!-- Cell 3: Small Standard Element Box (1x1 Block) -->
+      <section class="bento-box">
+        <div>
+          <div class="box-label">Storage</div>
+          <h2 class="box-title" style="font-size: 18px">Cache Hits</h2>
+        </div>
+        <div class="stat-counter" style="color: #34d399">87.4k</div>
+      </section>
+
+      <!-- Cell 4: Small Standard Element Box (1x1 Block) -->
+      <section class="bento-box">
+        <div>
+          <div class="box-label">Security</div>
+          <h2 class="box-title" style="font-size: 18px">SSL Status</h2>
+        </div>
+        <p
+          class="box-desc"
+          style="
+            color: #34d399;
+            font-weight: 600;
+            font-size: 15px;
+            margin-top: auto;
+          "
+        >
+          ✓ Secure Key
+        </p>
+      </section>
+
+      <!-- Cell 5: Wide Horizon Data Metrics Display Runner (2x1 Block) -->
+      <section class="bento-box box-wide">
+        <div>
+          <div class="box-label">Analytics Timeline</div>
+          <h2 class="box-title" style="font-size: 20px">
+            Real-time Ingress Request Load Logs
+          </h2>
+        </div>
+        <p class="box-desc">
+          System operations telemetry metrics updating live at global edge
+          distribution layers.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
