@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Typing Illusion</title>
+    <style>
+      /* Dark minimalist workspace canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #03050a;
+        font-family: "Courier New", Courier, monospace; /* Monospace is essential for character-width math */
+      }
+
+      /* --- THE TYPING TEXT ENGINE --- */
+      .typing-container {
+        display: inline-block;
+      }
+
+      .typing-text {
+        display: block;
+        color: #38bdf8; /* Bright electric sky blue highlight */
+        font-size: 44px;
+        font-weight: 900;
+
+        /* Essential setup for the animation barrier */
+        white-space: nowrap;
+        overflow: hidden;
+
+        /* The solid cursor line */
+        border-right: 3px solid #38bdf8;
+
+        /* THE TRICK: 
+         - Width must exactly match the number of characters (including spaces) in ch units.
+         - The steps() count must equal the exact character count of your string (18 in this case).
+      */
+        width: 18ch;
+
+        /* Bind our modular animation loops */
+        animation: type-characters 4s steps(18) infinite alternate,
+          blink-cursor 0.75s step-end infinite;
+      }
+
+      /* --- ANIMATION MATHEMATICS --- */
+
+      /* Animate the width of the box character-by-character */
+      @keyframes type-characters {
+        0%,
+        10% {
+          width: 0;
+        }
+        70%,
+        100% {
+          width: 18ch; /* Fully typed out state */
+        }
+      }
+
+      /* Animate the border-color to simulate a flashing cursor terminal indicator */
+      @keyframes blink-cursor {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #38bdf8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="typing-container">
+      <h1 class="typing-text">Initialize Systems</h1>
+    </div>
+  </body>
+</html>
