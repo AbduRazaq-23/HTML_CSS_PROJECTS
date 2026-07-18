@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Neon Glowing Sign</title>
+    <style>
+      /* Premium dark brick/canvas staging environment */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #050508;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+      }
+
+      /* THE SIGNBOARD BASE FRAME */
+      .neon-container {
+        text-align: center;
+        padding: 40px;
+      }
+
+      /* --- THE NEON ENGINE --- */
+      .neon-text {
+        font-size: 64px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 6px;
+
+        /* Base tube core color (almost pure white to mimic real lit glass tubes) */
+        color: #fffdfa;
+
+        /* THE TRICK: Layered text-shadow matrices. 
+         - First 3 layers: The tight intense hot-core ionization glow.
+         - Outer 3 layers: The wide ambient gas dispersion halo. */
+        text-shadow: 0 0 4px #fff, 0 0 10px #ff0055, 0 0 20px #ff0055,
+          0 0 40px #ff0055, 0 0 80px #ff0055, 0 0 120px #ff0055;
+
+        /* Bind the asymmetric flickering micro-loop */
+        animation: neon-flicker 3s infinite alternate;
+      }
+
+      /* --- FILAMENT FLICKER KEYFRAMES --- */
+      @keyframes neon-flicker {
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+          /* Fully ionized stable current state */
+          text-shadow: 0 0 4px #fff, 0 0 10px #ff0055, 0 0 20px #ff0055,
+            0 0 40px #ff0055, 0 0 80px #ff0055, 0 0 120px #ff0055;
+          color: #fffdfa;
+        }
+        20%,
+        24%,
+        55% {
+          /* Hard voltage drop state - killing wide ambient gas fields instantly */
+          text-shadow: 0 0 2px #fff, 0 0 4px #ff0055, 0 0 10px #ff0055;
+          color: #8a1a3a; /* Tube darkens to hot unlit filament magenta */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The Interactive Neon Signboard Stage -->
+    <div class="neon-container">
+      <h1 class="neon-text">Live Feed</h1>
+    </div>
+  </body>
+</html>
