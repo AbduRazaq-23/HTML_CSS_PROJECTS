@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kinetic Typography Split</title>
+    <style>
+      /* Dark editorial layout canvas */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #05070f;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+      }
+
+      /* THE KINETIC MUX FRAME CONTAINER */
+      .split-wrapper {
+        position: relative;
+        cursor: pointer;
+        padding: 20px;
+      }
+
+      /* MASTER TYPOGRAPHY SPECS LAYER */
+      .split-text {
+        font-size: 84px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        margin: 0;
+        line-height: 1;
+
+        /* Make the base element completely invisible. 
+         We only use it to reserve physical layout space. */
+        color: transparent;
+        user-select: none;
+      }
+
+      /* --- THE SPLIT ENGINE SUB-LAYERS --- */
+      .split-text::before,
+      .split-text::after {
+        content: attr(
+          data-text
+        ); /* Pull the text string from the HTML data attribute */
+        position: absolute;
+        inset: 0;
+        padding: 20px; /* Synchronize padding bounds with wrapper frame */
+        color: #ffffff;
+
+        /* Super sharp spring animation curve */
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      /* THE TRICK: Use clip-path boundaries to divide the text geometry exactly in half */
+
+      /* TOP LAYER: Show only the top 50% of the box layout */
+      .split-text::before {
+        clip-path: inset(0 0 50% 0);
+        color: #6366f1; /* Indiscreet accent layer distinction */
+      }
+
+      /* BOTTOM LAYER: Show only the bottom 50% of the box layout */
+      .split-text::after {
+        clip-path: inset(50% 0 0 0);
+      }
+
+      /* --- INTERACTIVE MOTION VALUES --- */
+
+      /* On hover, slide the sliced geometries out along opposite horizontal vectors */
+      .split-wrapper:hover .split-text::before {
+        transform: translateX(-12px);
+      }
+
+      .split-wrapper:hover .split-text::after {
+        transform: translateX(12px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Kinetic Splitting Grid Module Wrapper -->
+    <div class="split-wrapper">
+      <!-- The exact text must be duplicated safely inside the data-text attribute parameter -->
+      <h1 class="split-text" data-text="Breakout">Breakout</h1>
+    </div>
+  </body>
+</html>
